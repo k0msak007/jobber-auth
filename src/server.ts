@@ -12,7 +12,7 @@ import compression from 'compression';
 import { appRoutes } from '@auth/routes';
 import { Channel } from 'amqplib';
 
-import { checkConnection } from './elasticsearch';
+import { checkConnection, createIndex } from './elasticsearch';
 import { createConnection } from './queues/connection';
 
 const SERVER_PORT = 4002;
@@ -67,6 +67,7 @@ async function startQueues(): Promise<void> {
 
 function startElasticSearch(): void {
   checkConnection();
+  createIndex('gigs');
 }
 
 function authErrorHandler(app: Application): void {
